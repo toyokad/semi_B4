@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+import fitz
+
+pdf_document = fitz.open("file.pdf")
+
+
+for current_page in range(len(pdf_document)):
+    for annot in pdf_document[current_page].annots():
+            xref = annot.get_pixmap()
+            xref.writePNG("page%s-%s.png" % (current_page, xref))
